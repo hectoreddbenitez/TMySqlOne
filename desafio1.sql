@@ -12,18 +12,13 @@ CREATE TABLE info_planos
 CREATE TABLE info_usuario 
 (
     usuario_id INT AUTO_INCREMENT PRIMARY KEY,
-    nome_usuario	varchar(300) NOT NULL,
-    idade_usuario	INT NOT NULL
+    nome_usuario	VARCHAR(300) NOT NULL,
+    idade_usuario	INT NOT NULL,
+    plano_id	INT NOT NULL,
+    data_assinatura	DATE NOT NULL,
+    FOREIGN KEY (plano_id) REFERENCES info_planos (plano_id)
 )ENGINE = InnoDB;
 
-    CREATE TABLE planos_ativos 
-(
-    plano_id	INT NOT NULL,
-    usuario_id	INT NOT NULL,
-    data_assinatura	DATE NOT NULL,
-    FOREIGN KEY (plano_id) REFERENCES info_planos (plano_id), 
-    FOREIGN KEY (usuario_id) REFERENCES info_usuario (usuario_id)
-)ENGINE = InnoDB;
 
 CREATE TABLE info_artista
 
@@ -76,34 +71,19 @@ VALUES
     
     
 
-INSERT INTO info_usuario (usuario_id,nome_usuario,idade_usuario)
+INSERT INTO info_usuario (usuario_id,nome_usuario,idade_usuario, plano_id,data_assinatura)
 VALUES
-    (1, "Thati", 23),
-    (2, "Cintia", 35),
-    (3, "Bill", 20),
-    (4, "Roger", 45),
-    (5, "Norman", 58),
-    (6, "Patrick", 33),
-    (7, "Vivian", 26),
-    (8, "Carol", 19),
-    (9, "Angelina", 42),
-    (10, "Paul", 46);
+    (1, "Thati",    23, 1, "2019-10-20"),
+    (2, "Cintia",   35, 2, "2017-12-30"),
+    (3, "Bill",     20, 3, "2019-06-05"),
+    (4, "Roger",    45, 4, "2020-05-13"),
+    (5, "Norman",   58, 4, "2017-02-17"),
+    (6, "Patrick",  33, 2, "2017-01-06"),
+    (7, "Vivian",   26, 3, "2018-01-05"),
+    (8, "Carol",    19, 3, "2018-02-14"),
+    (9, "Angelina", 42, 2, "2018-04-29"),
+    (10, "Paul",    46, 2, "2017-01-17");
     
-
-
-INSERT INTO planos_ativos (plano_id,usuario_id,data_assinatura)
-VALUES
-    (1, 1, "2019-10-20"),
-    (2, 2, "2017-12-30"),
-    (3, 3, "2019-06-05"),
-    (4, 4, "2020-05-13"),
-    (4, 5, "2017-02-17"),
-    (2, 6, "2017-01-06"),
-    (3, 7, "2018-01-05"),
-    (3, 8, "2018-02-14"),
-    (2, 9, "2018-04-29"),
-    (2, 10, "2017-01-17");
-
 
 
 INSERT INTO info_artista (artista_id,nome_artista)
@@ -242,3 +222,5 @@ VALUES
     (10, 19, "2017-12-04 05:33:43"),
     (10, 12, "2017-07-27 05:24:49"),
     (10, 13, "2017-12-25 01:03:57");
+    
+   
