@@ -2,14 +2,14 @@ DROP DATABASE IF EXISTS SpotifyClone;
 CREATE DATABASE IF NOT EXISTS SpotifyClone;
 USE SpotifyClone;
 
-CREATE TABLE info_planos 
+    CREATE TABLE info_planos 
 (
     plano_id	INT AUTO_INCREMENT PRIMARY KEY,
     tipo_plano	VARCHAR(300) NOT NULL,
     valor_plano	DECIMAL(4,2)
 )ENGINE = InnoDB;
 
-CREATE TABLE info_usuario 
+    CREATE TABLE info_usuario 
 (
     usuario_id INT AUTO_INCREMENT PRIMARY KEY,
     nome_usuario	VARCHAR(300) NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE info_usuario
 )ENGINE = InnoDB;
 
 
-CREATE TABLE info_artista
+    CREATE TABLE info_artista
 
 (
     artista_id	INT PRIMARY KEY AUTO_INCREMENT,
@@ -29,10 +29,12 @@ CREATE TABLE info_artista
 
     CREATE TABLE info_albums 
 (
-    álbum_id	INT PRIMARY KEY AUTO_INCREMENT,
+    album_id	INT PRIMARY KEY AUTO_INCREMENT,
     artista_id	INT NOT NULL,
     ano_lancamento	INT NOT NULL,
-    nome_album	varchar(300)
+    nome_album	varchar(300),
+    FOREIGN KEY (artista_id) REFERENCES info_artista (artista_id)
+
 )ENGINE = InnoDB;
 
     CREATE TABLE info_musica 
@@ -40,7 +42,11 @@ CREATE TABLE info_artista
     musica_id	INT PRIMARY KEY AUTO_INCREMENT,
     nome_musica	VARCHAR(300) NOT NULL,
     duração_segundos	INT NOT NULL,
-    ano_lançamento	INT NOT NULL
+    ano_lançamento	INT NOT NULL,
+    album_id INT NOT NULL,
+    FOREIGN KEY (album_id) REFERENCES info_albums (album_id)
+
+    
 )ENGINE = InnoDB;
 
     CREATE TABLE historico_de_reproducoes
@@ -48,15 +54,17 @@ CREATE TABLE info_artista
     usuario_id	INT NOT NULL,
     musica_id	INT NOT NULL,
     data_reproducao	DATETIME NOT NULL,
+    PRIMARY KEY (usuario_id, musica_id),
     FOREIGN KEY (usuario_id) REFERENCES info_usuario (usuario_id), 
     FOREIGN KEY (musica_id) REFERENCES info_musica (musica_id)
     
 )ENGINE = InnoDB;
 
-CREATE TABLE info_seguidores 
+    CREATE TABLE info_seguidores 
 (
     usuario_id INT NOT NULL,
     artista_id	INT NOT NULL,
+    PRIMARY KEY (usuario_id, artista_id),
     FOREIGN KEY (usuario_id) REFERENCES info_usuario (usuario_id),
     FOREIGN KEY (artista_id) REFERENCES info_artista (artista_id)
 )ENGINE = InnoDB;
@@ -97,7 +105,7 @@ VALUES
        
 
 
-INSERT INTO info_albums (álbum_id,artista_id,ano_lancamento,nome_album)
+INSERT INTO info_albums (album_id,artista_id,ano_lancamento,nome_album)
 VALUES
     (1, 1, 1990, "Envious"),
     (2, 1, 1993, "Exuberant"),
@@ -138,48 +146,48 @@ VALUES
     
 
 
-INSERT INTO info_musica (musica_id,nome_musica,duração_segundos,ano_lançamento)
+INSERT INTO info_musica (musica_id,nome_musica,duração_segundos,ano_lançamento, album_id)
 VALUES
-    (1,"Soul For Us", 200, 1990),
-    (2,"Reflections Of Magic", 163, 1990),
-    (3,"Dance With Her Own", 116, 1990),
-    (4,"Troubles Of My Inner Fire", 203, 1993),
-    (5,"Time Fireworks", 152, 1993),
-    (6,"Magic Circus", 105, "1995"),
-    (7,"Honey, So Do I", 207, "1995"),
-    (8,"Sweetie, Lets Go Wild", 139, "1995"),
-    (9,"She Knows", 244, "1995"),
-    (10,"Fantasy For Me", 100, 1998),
-    (11,"Celebration Of More", 146, 1998),
-    (12,"Rock His Everything", 223, 1998),
-    (13,"Home Forever", 231, 1998),
-    (14,"Diamond Power", 241, 1998),
-    (15, "Lets Be Silly", 132, 1998),
-    (16,"Need Of The Evening", 240, 2001),
-    (17,"Thang Of Thunder", 185, 2001),
-    (18,"Words Of Her Life", 176, 2001),
-    (19,"Without My Streets", 190, 2003),
-    (20,"History Of My Roses", 222, 2003),
-    (21,"Without My Love", 111, 2003),
-    (22,"Walking And Game", 123, 2003),
-    (23,"Young And Father", 197, 2003),
-    (24,"Celebration Of More", 179, 2007),
-    (25,"Walking And Man", 229, 2007),
-    (26,"Hard And Time", 135, 2007),
-    (27,"Honey, Im A Lone Wolf", 150, 2007),
-    (28,"She Thinks I Wont Stay Tonight", 166, 2012),
-    (29,"He Heard Youre Bad For Me", 154, 2012),
-    (30,"He Hopes We Cant Stay", 210, 2012),
-    (31,"I Know I Know", 117, 2012),
-    (32,"Hes Walking Away", 159, 2015),
-    (33,"Hes Trouble", 138, 2015),
-    (34,"I Heard I Want To Bo Alone", 120, 2015),
-    (35,"I Ride Alone", 150, 2015),
-    (36,"Honey", 79, 2015),
-    (37,"You Cheated On Me", 95, 2015),
-    (38,"Wouldnt It Be Nice", 213, 2015),
-    (39,"Baby", 136, 2015),
-    (40,"You Make Me Feel So..", 80, 2015);
+    (1,"Soul For Us", 200, 1990, 1),
+    (2,"Reflections Of Magic", 163, 1990, 1),
+    (3,"Dance With Her Own", 116, 1990, 1),
+    (4,"Troubles Of My Inner Fire", 203, 1993, 2),
+    (5,"Time Fireworks", 152, 1993, 2),
+    (6,"Magic Circus", 105, 1995, 3),
+    (7,"Honey, So Do I", 207, 1995, 3),
+    (8,"Sweetie, Lets Go Wild", 139, 1995, 3),
+    (9,"She Knows", 244, "1995", 3),
+    (10,"Fantasy For Me", 100, 1998, 4),
+    (11,"Celebration Of More", 146, 1998, 4),
+    (12,"Rock His Everything", 223, 1998, 4),
+    (13,"Home Forever", 231, 1998, 4),
+    (14,"Diamond Power", 241, 1998, 4),
+    (15, "Lets Be Silly", 132, 1998, 4),
+    (16,"Need Of The Evening", 240, 2001, 5),
+    (17,"Thang Of Thunder", 185, 2001, 5),
+    (18,"Words Of Her Life", 176, 2001, 5),
+    (19,"Without My Streets", 190, 2003, 6),
+    (20,"History Of My Roses", 222, 2003, 6),
+    (21,"Without My Love", 111, 2003, 6),
+    (22,"Walking And Game", 123, 2003, 6),
+    (23,"Young And Father", 197, 2003, 6),
+    (24,"Celebration Of More", 179, 2007, 7),
+    (25,"Walking And Man", 229, 2007, 7),
+    (26,"Hard And Time", 135, 2007, 7),
+    (27,"Honey, Im A Lone Wolf", 150, 2007, 7),
+    (28,"She Thinks I Wont Stay Tonight", 166, 2012, 8),
+    (29,"He Heard Youre Bad For Me", 154, 2012, 8),
+    (30,"He Hopes We Cant Stay", 210, 2012, 8),
+    (31,"I Know I Know", 117, 2012, 8),
+    (32,"Hes Walking Away", 159, 2015, 9),
+    (33,"Hes Trouble", 138, 2015, 9),
+    (34,"I Heard I Want To Bo Alone", 120, 2015, 9),
+    (35,"I Ride Alone", 150, 2015, 9),
+    (36,"Honey", 79, 2015, 10),
+    (37,"You Cheated On Me", 95, 2015, 10),
+    (38,"Wouldnt It Be Nice", 213, 2015, 10),
+    (39,"Baby", 136, 2015, 10),
+    (40,"You Make Me Feel So..", 80, 2015, 10);
     
 
 INSERT INTO historico_de_reproducoes (usuario_id,musica_id,data_reproducao)
