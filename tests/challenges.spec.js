@@ -19,14 +19,14 @@ describe('Queries de seleção', () => {
     }
 
     importer.disconnect();
-console.log('configurando sequelize')
+
     sequelize = new Sequelize('SpotifyClone', process.env.MYSQL_USER, process.env.MYSQL_PASSWORD, {host:process.env.HOSTNAME, dialect: 'mysql'})
   });
 
   afterAll(async () => {
     await sequelize.query('DROP DATABASE SpotifyClone;', { type: 'RAW' });
     sequelize.close();
-    console.log('fechando sequelize')
+  
     const importer = new Importer(
       { user: process.env.MYSQL_USER, password: process.env.MYSQL_PASSWORD, host: process.env.HOSTNAME }
     );
@@ -74,7 +74,7 @@ console.log('configurando sequelize')
       } = JSON.parse(readFileSync('desafio1.json', 'utf8'));
 
       expect(planTable).not.toBe(userTable);
-      console.log(sequelize)
+   
       const plansCount = await sequelize.query(
         `SELECT COUNT(${planColumn}) AS quantidade_planos FROM ${planTable};`,
         { type: 'SELECT' },
