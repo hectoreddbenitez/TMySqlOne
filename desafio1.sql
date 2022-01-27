@@ -172,7 +172,7 @@ VALUES
     (22, "Walking And Game", 123, 2003, 6),
     (23, "Young And Father", 197, 2003, 6),
     (24, "Finding My Traditions", 179, 2007, 7),
-    (25, " Walking And Man", 229, 2007, 7),
+    (25, "Walking And Man", 229, 2007, 7),
     (26, "Hard And Time", 135, 2007, 7),
     (27, "Honey, Im A Lone Wolf", 150, 2007, 7),
     (28, "She Thinks I Wont Stay Tonight", 166, 2012, 8),
