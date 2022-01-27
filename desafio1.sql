@@ -162,7 +162,7 @@ VALUES
     (12, "Rock His Everything", 223, 1998, 4),
     (13, "Home Forever", 231, 1998, 4),
     (14, "Diamond Power", 241, 1998, 4),
-    (15, "Lets Be Silly", 132, 1998, 4),
+    (15, "Let's Be Silly", 132, 1998, 4),
     (16, "Thang Of Thunder", 240, 2001, 5),
     (17, "Words Of Her Life", 185, 2001, 5),
     (18, "Without My Streets", 176, 2001, 5),
@@ -174,20 +174,20 @@ VALUES
     (24, "Finding My Traditions", 179, 2007, 7),
     (25, "Walking And Man", 229, 2007, 7),
     (26, "Hard And Time", 135, 2007, 7),
-    (27, "Honey, Im A Lone Wolf", 150, 2007, 7),
+    (27, "Honey, I'm A Lone Wolf", 150, 2007, 7),
     (28, "She Thinks I Wont Stay Tonight", 166, 2012, 8),
     (29, "He Heard Youre Bad For Me", 154, 2012, 8),
     (30, "He Hopes We Cant Stay", 210, 2012, 8),
-    (31, " I Know I Know", 117, 2012, 8),
+    (31, "I Know I Know", 117, 2012, 8),
     (32, "Hes Walking Away", 159, 2015, 9),
     (33, "Hes Trouble", 138, 2015, 9),
     (34, "I Heard I Want To Bo Alone", 120, 2015, 9),
     (35, "I Ride Alone", 151, 2015, 9),
     (36, "Honey", 79, 2015, 10),
     (37, "You Cheated On Me", 95, 2015, 10),
-    (38, " Wouldnt It Be Nice", 213, 2015, 10),
+    (38, "Wouldnt It Be Nice", 213, 2015, 10),
     (39, "Baby", 136, 2015, 10),
-    (40, " You Make Me Feel So..", 83, 2015, 10);
+    (40, "You Make Me Feel So..", 83, 2015, 10);
     
 
 INSERT INTO historico_de_reproducoes (usuario_id,musica_id,data_reproducao)
